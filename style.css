@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    margin: 0px;
+}
+
+.square {
+    border: 1px groove;
+    padding: 12px;
+}
+
+#gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 420px;
+}
