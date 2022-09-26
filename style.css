@@ -1,19 +1,23 @@
 body {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    margin: 0px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  margin: 0px;
 }
 
 .square {
-    border: 1px groove;
-    padding: 12px;
+  border: 1px groove;
+  padding: 12px;
+}
+
+.hover {
+    background-color: blue;
 }
 
 #gridContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 420px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 420px;
 }
