@@ -1,11 +1,41 @@
+let currDim = 16;
+
 create();
 
-function etch() {
+function reset() {
+  let parent = document.getElementById("gridContainer");
+  let child = parent.lastElementChild;
+  while (child) {
+    parent.removeChild(child);
+    child = parent.lastElementChild;
+  }
+  for (var i = 0; i < currDim * currDim; i++) {
+    makeGrid();
+  }
+  newPadding = (704 - currDim * 2) / currDim / 2;
   document.querySelectorAll(".square").forEach((item) => {
-    item.addEventListener("mouseover", (event) => {
-      item.classList.add("hover");
-    });
+    item.style.padding = newPadding + "px";
   });
+}
+
+function etch(funMode) {
+  if (funMode === false) {
+    document.querySelectorAll(".square").forEach((item) => {
+      item.addEventListener("mouseover", (event) => {
+        item.classList.add("hover");
+      });
+    });
+  } else {
+    console.log("Fun mode");
+    document.querySelectorAll(".square").forEach((item) => {
+      item.addEventListener("mouseover", (event) => {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      });
+    });
+  }
 }
 
 function getDimensions() {
@@ -13,8 +43,8 @@ function getDimensions() {
   while (Number(dims) > 100) {
     dims = prompt("Please enter new squares per side (less than 100)");
   }
-  updateGrid(dims);
-  return Number(dims);
+  currDim = Number(dims);
+  updateGrid(Number(dims));
 }
 
 function updateGrid(newDim) {
@@ -27,19 +57,19 @@ function updateGrid(newDim) {
   for (var i = 0; i < newDim * newDim; i++) {
     makeGrid();
   }
-  newPadding = (704 - (newDim * 2)) / newDim / 2;
-  console.log(newPadding);
+  newPadding = (704 - newDim * 2) / newDim / 2;
   document.querySelectorAll(".square").forEach((item) => {
-     item.style.padding = newPadding + "px";
-    });
-  etch();
+    item.style.padding = newPadding + "px";
+  });
+  etch(false);
 }
 
 function create() {
-  for (var i = 0; i < 16 * 16; i++) {
+  console.log(currDim);
+  for (var i = 0; i < currDim * currDim; i++) {
     makeGrid();
   }
-  etch();
+  etch(false);
 }
 
 function makeGrid() {
