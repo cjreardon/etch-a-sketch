@@ -1,22 +1,24 @@
-let currDim = 16;
+let currDim = 16; //initial grid side length
 
 create();
 
-function reset() {
-  let parent = document.getElementById("gridContainer");
-  let child = parent.lastElementChild;
-  while (child) {
-    parent.removeChild(child);
-    child = parent.lastElementChild;
-  }
-  for (var i = 0; i < currDim * currDim; i++) {
-    makeGrid();
-  }
-  newPadding = (704 - currDim * 2) / currDim / 2;
-  document.querySelectorAll(".square").forEach((item) => {
-    item.style.padding = newPadding + "px";
-  });
-}
+// can just call update grid with a default parameter of currDim
+
+// function reset() {
+//   let parent = document.getElementById("gridContainer");
+//   let child = parent.lastElementChild;
+//   while (child) { //make sure the sizing of the pixels holds
+//     parent.removeChild(child);
+//     child = parent.lastElementChild;
+//   }
+//   for (var i = 0; i < currDim * currDim; i++) {
+//     makeGrid();
+//   }
+//   newPadding = (704 - currDim * 2) / currDim / 2;
+//   document.querySelectorAll(".square").forEach((item) => {
+//     item.style.padding = newPadding + "px";
+//   });
+// }
 
 function etch(funMode) {
   if (funMode === false) {
@@ -26,7 +28,7 @@ function etch(funMode) {
       });
     });
   } else {
-    console.log("Fun mode");
+    console.log("Fun mode"); //random rgb value for each sqaure hovered over
     document.querySelectorAll(".square").forEach((item) => {
       item.addEventListener("mouseover", (event) => {
         let r = Math.floor(Math.random() * 256);
@@ -47,29 +49,28 @@ function getDimensions() {
   updateGrid(Number(dims));
 }
 
-function updateGrid(newDim) {
+function updateGrid(newDim = currDim) {
   let parent = document.getElementById("gridContainer");
   let child = parent.lastElementChild;
-  while (child) {
+  while (child) { // remove all of the child divs
     parent.removeChild(child);
     child = parent.lastElementChild;
   }
   for (var i = 0; i < newDim * newDim; i++) {
     makeGrid();
   }
-  newPadding = (704 - newDim * 2) / newDim / 2;
+  newPadding = (704 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
   document.querySelectorAll(".square").forEach((item) => {
     item.style.padding = newPadding + "px";
   });
-  etch(false);
+  etch(false); //go back to black and white
 }
 
 function create() {
-  console.log(currDim);
   for (var i = 0; i < currDim * currDim; i++) {
     makeGrid();
   }
-  etch(false);
+  etch(false); //start in black and white mode
 }
 
 function makeGrid() {
