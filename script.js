@@ -2,6 +2,19 @@ let currDim = 16; //initial grid side length
 
 create();
 
+
+var slider = document.getElementById('side');
+var sideDiv = document.getElementById('sideValue');
+
+slider.addEventListener('change', function() {
+  sideDiv.innerText = slider.value;
+  currDim = slider.value;
+  updateGrid(slider.value);
+});
+
+// to show sidelength initially
+sideDiv.innerText = slider.value;
+
 // can just call update grid with a default parameter of currDim
 
 // function reset() {
@@ -59,7 +72,7 @@ function updateGrid(newDim = currDim) {
   for (var i = 0; i < newDim * newDim; i++) {
     makeGrid();
   }
-  newPadding = (704 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
+  newPadding = (640 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
   document.querySelectorAll(".square").forEach((item) => {
     item.style.padding = newPadding + "px";
   });
