@@ -32,7 +32,6 @@ sideDiv.innerText = slider.value;
 // }
 
 function etch(mode) {
-  console.log(mode);
   if (mode === "blackAndWhite") {
     document.querySelectorAll(".square").forEach((item) => {
       item.addEventListener("mouseover", (event) => {
@@ -68,14 +67,14 @@ function etch(mode) {
   }
 }
 
-function getDimensions() {
-  var dims = prompt("Please enter new squares per side (less than 100)");
-  while (Number(dims) > 100) {
-    dims = prompt("Please enter new squares per side (less than 100)");
-  }
-  currDim = Number(dims);
-  updateGrid(Number(dims));
-}
+// function getDimensions() {
+//   var dims = prompt("Please enter new squares per side (less than 100)");
+//   while (Number(dims) > 100) {
+//     dims = prompt("Please enter new squares per side (less than 100)");
+//   }
+//   currDim = Number(dims);
+//   updateGrid(Number(dims));
+// }
 
 function updateGrid(newDim = currDim) {
   let parent = document.getElementById("gridContainer");
@@ -88,7 +87,7 @@ function updateGrid(newDim = currDim) {
   for (var i = 0; i < newDim * newDim; i++) {
     makeGrid();
   }
-  newPadding = (640 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
+  newPadding = (608 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
   document.querySelectorAll(".square").forEach((item) => {
     item.style.padding = newPadding + "px";
   });
