@@ -87,7 +87,7 @@ function updateGrid(newDim = currDim) {
   for (var i = 0; i < newDim * newDim; i++) {
     makeGrid();
   }
-  newPadding = (608 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
+  newPadding = (540 - newDim * 2) / newDim / 2; //width of grid minus borders divided by new number of squares (padding on both sides)
   document.querySelectorAll(".square").forEach((item) => {
     item.style.padding = newPadding + "px";
   });
