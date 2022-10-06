@@ -23,17 +23,24 @@
         </label>
         <div id="sideDiv"></div>
       </div>
-      <button class="button" id="funBtn" onclick="updateGrid();etch(true)">
+      <button class="button" id="funBtn" onclick="updateGrid();etch('funMode')">
         Fun Mode
       </button>
       <button
         class="button"
         id="blackWhiteBtn"
-        onclick="updateGrid();etch(false)"
+        onclick="updateGrid();etch('blackAndWhite')"
       >
         Black and White Mode
       </button>
-      <button class="button" id="clearBtn" onclick="updateGrid();etch(false)">
+      <button
+        class="button"
+        id="shadeBtn"
+        onclick="updateGrid();etch('shadeMode')"
+      >
+        Shading Mode
+      </button>
+      <button class="button" id="clearBtn" onclick="updateGrid();etch('blackAndWhite')">
         Erase
       </button>
     </div>

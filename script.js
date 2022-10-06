@@ -1,12 +1,10 @@
 let currDim = 16; //initial grid side length
-
 create();
 
+var slider = document.getElementById("side");
+var sideDiv = document.getElementById("sideValue");
 
-var slider = document.getElementById('side');
-var sideDiv = document.getElementById('sideValue');
-
-slider.addEventListener('change', function() {
+slider.addEventListener("change", function () {
   sideDiv.innerText = slider.value;
   currDim = slider.value;
   updateGrid(slider.value);
@@ -33,20 +31,37 @@ sideDiv.innerText = slider.value;
 //   });
 // }
 
-function etch(funMode) {
-  if (funMode === false) {
+function etch(mode) {
+  console.log(mode);
+  if (mode === "blackAndWhite") {
     document.querySelectorAll(".square").forEach((item) => {
       item.addEventListener("mouseover", (event) => {
-        item.classList.add("hover");
+        item.style.backgroundColor = "black";
       });
     });
-  } else {
-    console.log("Fun mode"); //random rgb value for each sqaure hovered over
+  } else if (mode === "funMode") {
+    //random rgb value for each sqaure hovered over
     document.querySelectorAll(".square").forEach((item) => {
       item.addEventListener("mouseover", (event) => {
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
+        item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      });
+    });
+  } else if(mode === "shadeMode"){
+    //shade mode
+    document.querySelectorAll(".square").forEach((item) => {
+      item.addEventListener("mouseover", (event) => {
+        let bgColor = item.style.backgroundColor;
+        bgColor=bgColor.substring(bgColor.indexOf('(')+1, bgColor.indexOf(')'));
+        rgbColors=bgColor.split(',', 3);
+        rgbColors[0]=parseInt(rgbColors[0]);
+        rgbColors[1]=parseInt(rgbColors[1]);
+        rgbColors[2]=parseInt(rgbColors[2]);
+        let r = Number(rgbColors[0]) - 25;
+        let g = Number(rgbColors[1]) - 25;
+        let b = Number(rgbColors[2]) - 25;
         item.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
       });
     });
@@ -65,7 +80,8 @@ function getDimensions() {
 function updateGrid(newDim = currDim) {
   let parent = document.getElementById("gridContainer");
   let child = parent.lastElementChild;
-  while (child) { // remove all of the child divs
+  while (child) {
+    // remove all of the child divs
     parent.removeChild(child);
     child = parent.lastElementChild;
   }
@@ -76,14 +92,14 @@ function updateGrid(newDim = currDim) {
   document.querySelectorAll(".square").forEach((item) => {
     item.style.padding = newPadding + "px";
   });
-  etch(false); //go back to black and white
+  //etch("blackAndWhite"); //go back to black and white
 }
 
 function create() {
   for (var i = 0; i < currDim * currDim; i++) {
     makeGrid();
   }
-  etch(false); //start in black and white mode
+  etch("blackAndWhite"); //start in black and white mode
 }
 
 function makeGrid() {
@@ -91,6 +107,7 @@ function makeGrid() {
   const newContent = document.createTextNode(" ");
   newDiv.appendChild(newContent);
   newDiv.classList.add("square");
+  newDiv.style.backgroundColor = "rgb(255, 255, 255)";
   const currentDiv = document.getElementById("gridContainer");
   currentDiv.appendChild(newDiv);
 }
